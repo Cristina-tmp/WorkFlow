@@ -11,15 +11,22 @@ interface BoardState {
   updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
   searchString: string;
   setSearchString: (searchString: string) => void;
+  newTaskInput: string;
+  setNewTaskInput: (newTaskInput: string) => void;
+  deleteTask: (taskIndex: number, todoId: Todo, id: TypedColumn) => void;
+  newTaskType: TypedColumn;
+  setNewTaskType: (newTaskType: TypedColumn) => void;
 }
 
 //initial
-export const useBoardStore = create<BoardState>((set) => ({
+export const useBoardStore = create<BoardState>((set, get) => ({
   board: {
     columns: new Map<TypedColumn, Column>(),
   },
   searchString: "",
   setSearchString: (searchString) => set({ searchString }),
+  newTaskInput: "",
+  newTaskType: "todo",
   //fetch todos from the db
   //todo:[...], inp:[...], done:[...]
   getBoard: async () => {
@@ -30,6 +37,18 @@ export const useBoardStore = create<BoardState>((set) => ({
   },
 
   setBoardState: (board) => set({ board }),
+
+  deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
+    const newColumns = new Map(get().board.columns);
+    //delete todoId from the newcolumn
+    newColumns.get(id)?.todos.splice(taskIndex, 1);
+    //set the new column
+    set({ board: { columns: newColumns } });
+  },
+
+  setNewTaskInput: (input: string) => set({ newTaskInput: input }),
+  setNewTaskType: (newTaskType) => set({ newTaskType }),
+
   updateTodoInDB: async (todo, columnId) => {
     await databases.updateDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
