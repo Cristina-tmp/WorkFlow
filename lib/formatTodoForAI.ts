@@ -1,14 +1,7 @@
 const formatTodoForAI = (board: Board) => {
-  const todos = Array.from(board.columns.entries());
-
-  const flatArray = todos.reduce((map, [key, value]) => {
-    map[key] = value.todos;
-    return map;
-  }, {} as { [key in TypedColumn]: Todo[] });
-
-  //reduce to ket:value(length)
-  const flatArrayCounted = Object.entries(flatArray).reduce(
+  const flatArrayCounted = Array.from(board.columns.entries()).reduce(
     (map, [key, value]) => {
+      map[key] = value.todos.length;
       return map;
     },
     {} as { [key in TypedColumn]: number }
