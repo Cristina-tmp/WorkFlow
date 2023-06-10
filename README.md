@@ -2,7 +2,7 @@ WORKFLOW is a full stack productivity app created with Next.js with drag-and-dro
 
 ## View Demo [Here](https://workflow-v1.vercel.app/)
 
-![alt text](/public/demo2.png)
+![alt text](/public/demo3.png)
 
 ## Getting Started
 
