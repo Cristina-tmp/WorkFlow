@@ -53,7 +53,10 @@ const TodoCard = ({
       <div className="flex justify-between items-center p-5">
         <p>{todo.title}</p>
         <button
-          onClick={() => deleteTask(index, todo, id) && deleteTodoInDB(todo)}
+          onClick={() => {
+            deleteTask(index, todo, id);
+            deleteTodoInDB(todo);
+          }}
           className=" text-red-500 hover:text-red-600"
         >
           <XCircleIcon className="h-8 w-8 ml-5 text-red-500" />
