@@ -1,4 +1,4 @@
-WORKFLOW is a full stack productivity app created with Next.js with drag-and-drop featured and powered by ChatGPT.
+WORKFLOW is a full stack productivity app offering drag-and-drop functionality and powered by ChatGPT.
 
 ## View Demo [Here](https://workflow-v1.vercel.app/)
 
